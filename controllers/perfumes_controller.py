@@ -29,11 +29,11 @@ def post_perfume(data):
 
     if not nombre or not marca or not precio or not stock or not ml:
         return {"error": "Faltan datos"}, 400
-    connect = connect()
-    cursor = connect.cursor()
+    connection = connect()
+    cursor = connection.cursor()
     cursor.execute("INSERT INTO perfumes (nombre, marca, precio, stock, ml) VALUES (%s, %s, %s, %s, %s)", (nombre, marca, precio, stock, ml))
-    connect.commit()
-    connect.close()
+    connection.commit()
+    connection.close()
     cursor.close()
     return {"message": "perfume creado correctamente"}, 201
 
@@ -56,10 +56,10 @@ def put_perfume(id, data):
     return {"mensaje": "Perfume actualizado correctamente"}
 
 def delete_perfume(id):
-    connect = connect()
-    cursor = connect.cursor()
+    connection = connect()
+    cursor = connection.cursor()
     cursor.execute("DELETE FROM perfumes WHERE id = %s", (id,))
-    connect.commit()
+    connection.commit()
     cursor.close()
-    connect.close()
+    connection.close()
     return {"mensaje": "Perfume eliminado correctamente"}
